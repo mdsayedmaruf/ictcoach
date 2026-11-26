@@ -1410,6 +1410,141 @@ body.laser-mode .laser-dot { display: block; }
 }
 
 /* ==========================================================================
+   Mobile & Tablet Responsive Overrides
+   ========================================================================== */
+@media (max-width: 900px) {
+  .deck-app {
+    height: 100dvh;
+  }
+
+  .deck-header {
+    height: auto;
+    min-height: 50px;
+    padding: 8px 10px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .header-center-info {
+    display: none;
+  }
+
+  .brand-badge .brand-tag {
+    display: none;
+  }
+
+  .header-tools {
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .tool-btn {
+    padding: 5px 9px;
+    font-size: 0.76rem;
+  }
+
+  .deck-stage {
+    padding: 6px;
+    overflow: hidden;
+  }
+
+  .presentation-frame {
+    aspect-ratio: auto;
+    height: 100%;
+    max-height: none;
+    border-radius: 8px;
+  }
+
+  .slide-inner {
+    padding: 18px 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .slide-header-block {
+    margin-bottom: 14px;
+  }
+
+  .slide-title-primary {
+    font-size: clamp(1.25rem, 5vw, 1.65rem) !important;
+    line-height: 1.3 !important;
+  }
+
+  .slide-main-title {
+    font-size: clamp(1.55rem, 6.5vw, 2.2rem) !important;
+    line-height: 1.25 !important;
+  }
+
+  .slide-main-desc,
+  .slide-subtitle {
+    font-size: 0.92rem !important;
+  }
+
+  .grid-2col,
+  .compare-container,
+  .hero-stats-grid,
+  .checklist-grid,
+  .tag-grid-2col,
+  .code-demo-grid {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+
+  .stage-hotspot {
+    display: none !important;
+  }
+
+  .teacher-notes-drawer {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .deck-footer {
+    height: auto;
+    min-height: 52px;
+  }
+
+  .footer-controls {
+    padding: 6px 10px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .nav-ctrl-btn {
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    gap: 4px;
+  }
+
+  .overview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  .brand-badge {
+    display: none;
+  }
+
+  .footer-left .nav-ctrl-btn:first-child,
+  .footer-left .nav-ctrl-btn:last-child {
+    display: none;
+  }
+
+  .slide-counter-box {
+    font-size: 0.82rem;
+    padding: 3px 8px;
+  }
+
+  .slide-num-input {
+    width: 42px;
+    font-size: 0.82rem;
+  }
+}
+
+/* ==========================================================================
    Print / Handout Stylesheet
    ========================================================================== */
 @media print {

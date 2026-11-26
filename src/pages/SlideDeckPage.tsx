@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, Download } from 'lucide-react';
 import { getClassDeck } from '../services/slideService';
+import { exportSlidesToPdf } from '../utils/exportSlidesPdf';
 import type { ClassDeck, SlideItem, Subject } from '../types/slides';
 
 declare global {
@@ -41,12 +42,14 @@ export function SlideDeckPage() {
 
   // Quiz state for React-rendered quiz slides
   const [quizSelected, setQuizSelected] = useState<number | null>(null);
+  const [pdfProgress, setPdfProgress] = useState<{ current: number; total: number } | null>(null);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const frameRef = useRef<HTMLDivElement | null>(null);
   const isDrawingRef = useRef(false);
   const lastPosRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
   const canvasHistoryRef = useRef<Record<number, string>>({});
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
 
   // Load deck
   useEffect(() => {
@@ -324,6 +327,39 @@ export function SlideDeckPage() {
     });
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (isPenMode || e.touches.length !== 1) return;
+    touchStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    if (isPenMode || !touchStartRef.current || e.changedTouches.length !== 1) return;
+    const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
+    const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
+    touchStartRef.current = null;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+      if (dx < 0) nextSlide();
+      else prevSlide();
+    }
+  };
+
+  const handleDownloadPdf = async () => {
+    if (pdfProgress || !deck || slides.length === 0) return;
+    setPdfProgress({ current: 0, total: slides.length });
+    try {
+      await exportSlidesToPdf(
+        slides,
+        `${deck.slug}-slides.pdf`,
+        (current, total) => setPdfProgress({ current, total })
+      );
+    } finally {
+      setPdfProgress(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="portal-shell" style={{ justifyContent: 'center', alignItems: 'center' }}>
@@ -438,6 +474,8 @@ export function SlideDeckPage() {
           ref={frameRef}
           onMouseMove={handleFrameMouseMove}
           onMouseLeave={() => setLaserPos((p) => ({ ...p, visible: false }))}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           style={{ cursor: isLaserMode ? 'none' : undefined }}
         >
           <div className="slide-inner">
@@ -699,10 +737,16 @@ export function SlideDeckPage() {
           <div className="footer-right">
             <button
               className="nav-ctrl-btn"
-              onClick={() => window.print()}
-              title="Print / Save Handout (Ctrl+P)"
+              onClick={handleDownloadPdf}
+              disabled={pdfProgress !== null}
+              title="Convert all slides to PDF and download"
             >
-              <span>🖨️ Handout</span>
+              <Download size={15} />
+              <span>
+                {pdfProgress
+                  ? `PDF ${pdfProgress.current}/${pdfProgress.total}`
+                  : 'Download PDF'}
+              </span>
             </button>
           </div>
         </div>
