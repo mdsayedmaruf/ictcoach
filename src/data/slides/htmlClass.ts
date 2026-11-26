@@ -54,6 +54,59 @@ export const htmlClassSlides: SlideItem[] = [
   },
 
   {
+    id: 55,
+    module: "Mentor",
+    category: "মেন্টর পরিচিতি",
+    title: "মেন্টর ও লেকচারার পরিচিতি",
+    subtitle: "Sayed Maruf — ICT Coach",
+    layout: "content-grid",
+    teacherNotes: "ক্লাসের শুরুতে নিজের সংক্ষিপ্ত পরিচয় দিন এবং শিক্ষার্থীদের কোনো প্রশ্ন বা নোটের জন্য হোয়াটসঅ্যাপ ও ফেসবুকে যোগাযোগ করার তথ্য জানিয়ে দিন।",
+    html: `
+      <div class="grid-2col">
+        <div class="info-panel glass-card" style="display:flex; flex-direction:column; justify-content:space-between; gap:18px;">
+          <div>
+            <div class="slide-hero-badge" style="margin-bottom:14px;">MENTOR &amp; LECTURER</div>
+            <h3 style="font-size:2rem; font-weight:800; color:#ffffff; margin-bottom:6px;">Sayed Maruf</h3>
+            <p style="font-size:1.15rem; color:#00e5ff; font-weight:700; margin-bottom:16px;">
+              Student, Dept. of CSE — University of Chittagong (CSECU)
+            </p>
+            <ul class="styled-list">
+              <li>
+                <strong>প্রতিষ্ঠান:</strong>
+                <p>Department of Computer Science &amp; Engineering (CSE), University of Chittagong</p>
+              </li>
+              <li>
+                <strong>পাঠদানের বিষয়:</strong>
+                <p>HSC ICT (ওয়েব ডিজাইন ও HTML, সংখ্যা পদ্ধতি, C প্রোগ্রামিং, ডেটাবেজ) এবং বোর্ড CQ &amp; MCQ প্রস্তুতি</p>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="info-panel glass-card" style="display:flex; flex-direction:column; justify-content:space-between; gap:16px;">
+          <div>
+            <h3 class="panel-header text-gold">📬 যোগাযোগ ও সোশ্যাল লিংক</h3>
+            <div class="tip-box" style="margin-bottom:14px;">
+              <span class="tip-badge">WhatsApp</span>
+              <p style="font-size:1.15rem; font-weight:700; color:#ffffff;">01881574747</p>
+              <p style="font-size:0.9rem; color:#94a3b8;">ক্লাস নোট, প্রশ্ন সমাধান ও ব্যাচ সংক্রান্ত তথ্যের জন্য মেসেজ করুন</p>
+            </div>
+            <div class="tip-box">
+              <span class="tip-badge">Facebook</span>
+              <p style="font-size:1.05rem; font-weight:700; color:#00e5ff;">fb.com/sayedmarufctg</p>
+              <p style="font-size:0.88rem; color:#94a3b8;">https://www.facebook.com/sayedmarufctg</p>
+            </div>
+          </div>
+
+          <div class="analogy-box" style="margin-top:auto;">
+            🎓 <em>"কনসেপ্ট ক্লিয়ার থাকলে ICT বোর্ড পরীক্ষায় A+ নিশ্চিত।"</em>
+          </div>
+        </div>
+      </div>
+    `
+  },
+
+  {
     id: 2,
     module: "Intro",
     category: "বোর্ড এনালাইসিস",
