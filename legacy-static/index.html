@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ICT Coach — ওয়েব ডিজাইন ও HTML | Master Teaching Slide Deck</title>
+  
+  <!-- Premium Fonts for Bengali & English Presentations -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@500;600;700&family=Outfit:wght@600;700;800;900&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Modern Presentation Stylesheet -->
+  <link rel="stylesheet" href="css/presentation.css">
+</head>
+<body>
+
+  <div class="deck-app">
+
+    <!-- Top Teacher Navigation Bar -->
+    <header class="deck-header">
+      <div class="header-left">
+        <div class="brand-badge">
+          <span class="brand-dot"></span>
+          <span class="brand-title">ICT COACH</span>
+          <span class="brand-tag">Teaching Edition</span>
+        </div>
+      </div>
+
+      <div class="header-center-info">
+        <span class="current-module-badge" id="headerModuleBadge">Intro</span>
+        <span class="current-slide-heading" id="headerSlideTitle">ওয়েব ডিজাইন ও HTML</span>
+      </div>
+
+      <div class="header-tools">
+        <button id="btnOverview" class="tool-btn" title="Slide Overview Grid (O)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+          <span>Overview</span>
+        </button>
+
+        <button id="btnNotes" class="tool-btn" title="Teacher Speaker Notes (S)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          <span>Teacher Notes</span>
+        </button>
+
+        <button id="btnPen" class="tool-btn" title="Annotation Pen (P)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path></svg>
+          <span>Pen</span>
+        </button>
+
+        <button id="btnLaser" class="tool-btn" title="Presenter Laser Pointer (L)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="3" fill="currentColor"></circle></svg>
+          <span>Laser</span>
+        </button>
+
+        <button id="btnShortcuts" class="tool-btn icon-only" title="Keyboard Shortcuts (?)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        </button>
+
+        <button id="btnFullscreen" class="tool-btn icon-only" title="Toggle Fullscreen (F)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Stage Viewport -->
+    <main class="deck-stage">
+      <!-- 16:9 Aspect Ratio Presentation Frame -->
+      <div class="presentation-frame" id="presentationFrame">
+        
+        <!-- Slide Content Wrapper -->
+        <div class="slide-inner" id="slideInner">
+          <div class="slide-header-block" id="slideHeaderBlock">
+            <span class="slide-category-chip" id="slideCategoryChip">মৌলিক ধারণা</span>
+            <h2 class="slide-title-primary" id="slideTitlePrimary">স্লাইড শিরোনাম</h2>
+            <div class="slide-subtitle" id="slideSubtitle">উপশিরোনাম</div>
+          </div>
+
+          <!-- Dynamic Slide Body Content -->
+          <div class="slide-body-content" id="slideContent">
+            <!-- Dynamically injected from SLIDES_DATA -->
+          </div>
+        </div>
+
+        <!-- Digital Whiteboard Canvas Overlay (1920x1080) -->
+        <canvas id="deckCanvas" width="1920" height="1080"></canvas>
+
+        <!-- Presenter Laser Pointer -->
+        <div id="laserDot" class="laser-dot"></div>
+
+        <!-- Left/Right Hotspot Zones for Quick Next/Prev -->
+        <div class="stage-hotspot hotspot-left" id="hotspotPrev" title="Previous Slide (← / PgUp)">
+          <div class="hotspot-icon">‹</div>
+        </div>
+        <div class="stage-hotspot hotspot-right" id="hotspotNext" title="Next Slide (→ / Space / PgDn)">
+          <div class="hotspot-icon">›</div>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- Teacher Speaker Notes Drawer (Toggled by 'S') -->
+    <aside class="teacher-notes-drawer" id="teacherNotesDrawer">
+      <div class="notes-header">
+        <h3>👨‍🏫 Teacher Speaker Notes</h3>
+        <button class="btn-close-notes" id="btnCloseNotes">✕</button>
+      </div>
+      <div class="notes-body" id="notesBody">
+        <!-- Injected per slide -->
+      </div>
+    </aside>
+
+    <!-- Bottom Controls & Scrubber -->
+    <footer class="deck-footer">
+      <!-- Interactive Progress Scrubber -->
+      <div class="timeline-scrubber" id="timelineScrubber" title="Click to jump along the lecture">
+        <div class="timeline-fill" id="timelineFill"></div>
+      </div>
+
+      <div class="footer-controls">
+        <div class="footer-left">
+          <button id="btnFirst" class="nav-ctrl-btn" title="First Slide (Home)">⏮ First</button>
+          <button id="btnPrev" class="nav-ctrl-btn" title="Previous Slide (←)">◀ Prev</button>
+          <button id="btnNext" class="nav-ctrl-btn primary" title="Next Slide (→ / Space)">Next ▶</button>
+          <button id="btnLast" class="nav-ctrl-btn" title="Last Slide (End)">Last ⏭</button>
+        </div>
+
+        <div class="footer-center">
+          <div class="slide-counter-box">
+            <span>Slide</span>
+            <input type="number" id="inputSlideNum" class="slide-num-input" min="1" max="54" value="1">
+            <span style="color:#666;">/</span>
+            <span id="totalSlidesSpan">54</span>
+          </div>
+        </div>
+
+        <div class="footer-right">
+          <button class="nav-ctrl-btn" onclick="window.print()" title="Print / Save Handout (Ctrl+P)">
+            <span>🖨️ Handout</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Overview Lightbox Grid Modal (Toggled by 'O') -->
+    <div id="overviewModal" class="overview-modal" style="display:none;">
+      <div class="overview-backdrop" id="overviewBackdrop"></div>
+      <div class="overview-dialog">
+        <div class="overview-top">
+          <h3 style="color:#ffaa00; font-size:1.15rem;">📑 লেকচার স্লাইড তালিকা (Slide Overview)</h3>
+          <button id="btnCloseOverview" class="tool-btn icon-only">✕</button>
+        </div>
+        <div class="overview-cards-container" id="overviewGrid">
+          <!-- Dynamically populated cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Keyboard Shortcuts Modal (Toggled by '?') -->
+    <div id="shortcutsModal" class="overview-modal" style="display:none;">
+      <div class="overview-backdrop" id="shortcutsBackdrop"></div>
+      <div class="overview-dialog" style="max-width:540px; height:auto;">
+        <div class="overview-top">
+          <h3 style="color:#ffaa00;">⌨️ Presentation Keyboard Shortcuts</h3>
+          <button id="btnCloseShortcuts" class="tool-btn icon-only">✕</button>
+        </div>
+        <div style="padding:20px; display:flex; flex-direction:column; gap:10px;">
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Next Slide</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">→ / Space / PgDn</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Previous Slide</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">← / Backspace / PgUp</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Toggle Teacher Notes</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">S</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Digital Pen Mode</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">P</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Presenter Laser Pointer</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">L</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Clear Annotations</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">C</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between; border-bottom:1px solid #333; padding-bottom:6px;">
+            <span>Slide Overview Grid</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">O</kbd>
+          </div>
+          <div style="display:flex; justify-content:space-between;">
+            <span>Toggle Fullscreen</span>
+            <kbd style="color:#ffaa00; font-weight:bold;">F</kbd>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Slide Data & Presentation Engine Scripts -->
+  <script src="js/slides-data.js"></script>
+  <script src="js/presentation-engine.js"></script>
+</body>
+</html>
