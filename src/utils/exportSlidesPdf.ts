@@ -41,7 +41,7 @@ function buildSlideMarkup(slide: SlideItem): string {
   }
 
   return `
-    <div class="slide-inner" style="overflow: hidden;">
+    <div class="slide-inner" style="overflow: visible; height: auto;">
       ${headerHtml}
       <div class="slide-body-content">${bodyHtml}</div>
     </div>
@@ -55,19 +55,23 @@ export async function exportSlidesToPdf(
 ): Promise<void> {
   if (slides.length === 0) return;
 
-  const width = 1280;
-  const height = 720;
+  const renderWidth = 1600;
+  const minRenderHeight = 900;
+  const pageWidth = 1280;
+  const pageHeight = 720;
 
   const stage = document.createElement('div');
   stage.className = 'presentation-frame';
   stage.style.position = 'fixed';
   stage.style.left = '-99999px';
   stage.style.top = '0';
-  stage.style.width = `${width}px`;
-  stage.style.height = `${height}px`;
+  stage.style.width = `${renderWidth}px`;
+  stage.style.minHeight = `${minRenderHeight}px`;
+  stage.style.height = 'auto';
   stage.style.maxWidth = 'none';
   stage.style.maxHeight = 'none';
   stage.style.aspectRatio = 'auto';
+  stage.style.overflow = 'visible';
   stage.style.borderRadius = '0';
   stage.style.boxShadow = 'none';
   stage.style.zIndex = '-1';
@@ -77,7 +81,7 @@ export async function exportSlidesToPdf(
     const pdf = new jsPDF({
       orientation: 'landscape',
       unit: 'px',
-      format: [width, height],
+      format: [pageWidth, pageHeight],
       compress: true,
     });
 
@@ -85,23 +89,39 @@ export async function exportSlidesToPdf(
       onProgress?.(i + 1, slides.length);
       stage.innerHTML = buildSlideMarkup(slides[i]);
 
-      // Allow layout & fonts to settle
-      await new Promise((r) => requestAnimationFrame(() => setTimeout(r, 20)));
+      // Wait for layout & fonts to settle
+      await new Promise((r) => requestAnimationFrame(() => setTimeout(r, 25)));
+
+      const captureWidth = Math.max(renderWidth, stage.scrollWidth);
+      const captureHeight = Math.max(minRenderHeight, stage.scrollHeight);
 
       const canvas = await html2canvas(stage, {
-        width,
-        height,
-        scale: 1.25,
+        width: captureWidth,
+        height: captureHeight,
+        windowWidth: captureWidth,
+        windowHeight: captureHeight,
+        scale: 1,
         backgroundColor: '#0d1117',
         useCORS: true,
         logging: false,
       });
 
-      const imgData = canvas.toDataURL('image/jpeg', 0.88);
+      const imgData = canvas.toDataURL('image/jpeg', 0.9);
       if (i > 0) {
-        pdf.addPage([width, height], 'landscape');
+        pdf.addPage([pageWidth, pageHeight], 'landscape');
       }
-      pdf.addImage(imgData, 'JPEG', 0, 0, width, height, undefined, 'FAST');
+
+      // Fill background and scale-to-fit (contain) so nothing is ever clipped
+      pdf.setFillColor(13, 17, 23);
+      pdf.rect(0, 0, pageWidth, pageHeight, 'F');
+
+      const fitScale = Math.min(pageWidth / canvas.width, pageHeight / canvas.height);
+      const drawW = canvas.width * fitScale;
+      const drawH = canvas.height * fitScale;
+      const offsetX = (pageWidth - drawW) / 2;
+      const offsetY = (pageHeight - drawH) / 2;
+
+      pdf.addImage(imgData, 'JPEG', offsetX, offsetY, drawW, drawH, undefined, 'FAST');
     }
 
     pdf.save(filename.endsWith('.pdf') ? filename : `${filename}.pdf`);
