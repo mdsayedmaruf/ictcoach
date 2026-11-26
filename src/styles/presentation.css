@@ -1151,9 +1151,6 @@ body.laser-mode .laser-dot { display: block; }
   font-weight: 700;
   color: #ffffff;
 }
-  font-size: 0.95rem;
-  color: #e2e8f0;
-}
 
 .closing-banner {
   background: var(--bg-card);
