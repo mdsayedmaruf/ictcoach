@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Layers, PlayCircle, Presentation } from 'lucide-react';
+import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { getClassesBySubjectId, getSubjectBySlug } from '../services/slideService';
 import type { ClassDeckMeta, Subject } from '../types/slides';
@@ -45,8 +45,8 @@ export function SubjectPage() {
 
       <main className="portal-main">
         <Link to="/" className="breadcrumb">
-          <ArrowLeft size={16} />
-          Back to All Subjects
+          <ArrowLeft size={15} />
+          All Subjects
         </Link>
 
         {loading ? (
@@ -55,20 +55,17 @@ export function SubjectPage() {
           <div className="empty-state">Subject not found.</div>
         ) : (
           <>
-            <section className="portal-hero">
-              <div className="portal-hero-kicker">{subject.badge}</div>
+            <section className="portal-header">
+              <div className="portal-kicker">{subject.badge}</div>
               <h1>{subject.title}</h1>
-              <div className="card-subtitle-bn" style={{ fontSize: '1.15rem' }}>
+              <div className="card-subtitle-bn" style={{ fontSize: '1.08rem' }}>
                 {subject.titleBn}
               </div>
               <p>{subject.description}</p>
             </section>
 
             <div className="portal-section-header">
-              <h2 className="portal-section-title">
-                <Layers size={20} />
-                Classes ({classes.length})
-              </h2>
+              <h2 className="portal-section-title">Classes ({classes.length})</h2>
             </div>
 
             {classes.length === 0 ? (
@@ -82,24 +79,20 @@ export function SubjectPage() {
                     className="class-card"
                   >
                     <div>
-                      <div className="card-top">
-                        <div className="card-icon-box">
-                          <Presentation size={22} />
-                        </div>
-                        <span className="card-badge gold">
+                      <div className="card-meta-row">
+                        <span className="card-code">
                           Class {cls.classNumber} • {cls.chapter}
                         </span>
+                        <span className="card-count">{cls.slideCount} Slides</span>
                       </div>
 
-                      <h3 className="card-title" style={{ marginTop: '1rem' }}>
-                        {cls.title}
-                      </h3>
+                      <h3 className="card-title">{cls.title}</h3>
                       <div className="card-subtitle-bn">{cls.titleBn}</div>
                       <p className="card-desc">{cls.description}</p>
                     </div>
 
                     <div>
-                      <div className="card-tags" style={{ marginBottom: '1rem' }}>
+                      <div className="card-tags">
                         {cls.tags.map((tag) => (
                           <span key={tag} className="card-tag">
                             {tag}
@@ -108,11 +101,9 @@ export function SubjectPage() {
                       </div>
 
                       <div className="card-footer">
-                        <span>{cls.slideCount} Slides • {cls.duration}</span>
+                        <span>{cls.duration}</span>
                         <span className="card-cta">
-                          <PlayCircle size={16} />
-                          Open Slides
-                          <ArrowRight size={15} />
+                          Start Slides <ArrowRight size={15} />
                         </span>
                       </div>
                     </div>

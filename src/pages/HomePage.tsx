@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, MonitorPlay, Search } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { getClassesBySubjectId, getSubjects } from '../services/slideService';
 import type { Subject } from '../types/slides';
@@ -46,32 +46,24 @@ export function HomePage() {
       <Navbar />
 
       <main className="portal-main">
-        <section className="portal-hero">
-          <div className="portal-hero-kicker">
-            <MonitorPlay size={14} />
-            Interactive Classroom Slides
-          </div>
-          <h1>
-            Subject-Wise <span>Teaching Slides</span>
-          </h1>
+        <section className="portal-header">
+          <div className="portal-kicker">Course Materials</div>
+          <h1>Subject Lecture Slides</h1>
           <p>
-            Select a subject to browse class slide decks. Every deck includes a 16:9
-            interactive stage, teacher speaker notes, whiteboard annotation pen, laser
-            pointer, and live CQ/MCQ practice.
+            Select a subject below to open its class slide decks. Each deck runs in a
+            16:9 classroom viewer with speaker notes, whiteboard annotation, and
+            practice questions.
           </p>
         </section>
 
         <div className="portal-section-header">
-          <h2 className="portal-section-title">
-            <BookOpen size={20} />
-            Subjects ({filtered.length})
-          </h2>
+          <h2 className="portal-section-title">Subjects ({filtered.length})</h2>
 
           <label className="portal-search">
-            <Search size={16} color="#8b949e" />
+            <Search size={15} color="#7a818f" />
             <input
               type="text"
-              placeholder="Search subjects..."
+              placeholder="Filter subjects..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
@@ -89,24 +81,22 @@ export function HomePage() {
                 className="subject-card"
               >
                 <div>
-                  <div className="card-top">
-                    <div className="card-icon-box">
-                      <BookOpen size={22} />
-                    </div>
-                    <span className="card-badge">{subject.badge}</span>
+                  <div className="card-meta-row">
+                    <span className="card-code">{subject.badge}</span>
+                    <span className="card-count">
+                      {classCounts[subject.id] ?? 0} Class
+                    </span>
                   </div>
 
-                  <h3 className="card-title" style={{ marginTop: '1rem' }}>
-                    {subject.title}
-                  </h3>
+                  <h3 className="card-title">{subject.title}</h3>
                   <div className="card-subtitle-bn">{subject.titleBn}</div>
                   <p className="card-desc">{subject.description}</p>
                 </div>
 
                 <div className="card-footer">
-                  <span>{classCounts[subject.id] ?? 0} Class Deck</span>
+                  <span>{classCounts[subject.id] ?? 0} Lecture Deck</span>
                   <span className="card-cta">
-                    View Classes <ArrowRight size={16} />
+                    Open Subject <ArrowRight size={15} />
                   </span>
                 </div>
               </Link>
@@ -116,7 +106,7 @@ export function HomePage() {
       </main>
 
       <footer className="portal-footer">
-        ICT Coach • Static React Slide Portal • Ready for Cloudflare Pages
+        ICT Coach • Static Lecture Slide Archive
       </footer>
     </div>
   );
