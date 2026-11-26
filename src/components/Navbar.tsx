@@ -5,11 +5,12 @@ export function Navbar() {
     <header className="portal-nav">
       <div className="portal-nav-inner">
         <Link to="/" className="portal-brand">
+          <span className="portal-brand-mark">IC</span>
           <span className="portal-brand-name">ICT Coach</span>
-          <span className="portal-brand-sub">Lecture Archive</span>
+          <span className="portal-brand-sub">Slides</span>
         </Link>
 
-        <div className="portal-nav-meta">Classroom Slide Repository</div>
+        <div className="portal-nav-meta">Classroom Slide Portal</div>
       </div>
     </header>
   );
