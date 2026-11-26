@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Search } from 'lucide-react';
 import { Navbar } from '../components/Navbar';
 import { getClassesBySubjectId, getSubjects } from '../services/slideService';
+import { MENTOR_INFO } from '../data/mentor';
 import type { Subject } from '../types/slides';
 
 export function HomePage() {
@@ -106,7 +107,20 @@ export function HomePage() {
       </main>
 
       <footer className="portal-footer">
-        ICT Coach • Static Lecture Slide Archive
+        <div>
+          Lecturer: <strong>{MENTOR_INFO.name}</strong> ({MENTOR_INFO.shortAffiliation}) •{' '}
+          <Link to="/mentor" style={{ color: 'var(--accent-primary)', textDecoration: 'none', fontWeight: 500 }}>
+            Mentor Profile
+          </Link>{' '}
+          •{' '}
+          <a href={MENTOR_INFO.facebookUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--ink-secondary)', textDecoration: 'none' }}>
+            Facebook
+          </a>{' '}
+          •{' '}
+          <a href={MENTOR_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--ink-secondary)', textDecoration: 'none' }}>
+            WhatsApp: {MENTOR_INFO.whatsappDisplay}
+          </a>
+        </div>
       </footer>
     </div>
   );

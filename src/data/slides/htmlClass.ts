@@ -47,8 +47,8 @@ export const htmlClassSlides: SlideItem[] = [
       </div>
       
       <div class="hero-footer-bar">
-        <span>👨‍🏫 উপস্থাপনায়: <strong>ICT Coach Special Teaching Version</strong></span>
-        <span>⚡ অধ্যায় ৪: Web Design & HTML</span>
+        <span>👨‍🏫 Lecturer: <strong>Sayed Maruf</strong> (CSE, University of Chittagong)</span>
+        <span>📱 WhatsApp: <strong>01881574747</strong> • 🌐 fb.com/sayedmarufctg</span>
       </div>
     `
   },
@@ -2266,7 +2266,9 @@ C&lt;sub&gt;6&lt;/sub&gt;H&lt;sub&gt;12&lt;/sub&gt;O&lt;sub&gt;6&lt;/sub&gt;</co
 
       <div class="closing-banner">
         <div class="close-quote">"HTML মুখস্থ করার বিষয় নয়, নিয়ম বুঝে একবার কোড করলেই আজীবন মনে থাকবে।"</div>
-        <div class="close-credit">🎓 <strong>ICT Coach — তোমার স্বপ্নজয়ের সারথি</strong></div>
+        <div class="close-credit">
+          🎓 <strong>Lecturer: Sayed Maruf</strong> — CSE, University of Chittagong | WhatsApp: <strong>01881574747</strong> | fb.com/sayedmarufctg
+        </div>
       </div>
     `
   }

@@ -94,6 +94,133 @@
   font-weight: 500;
 }
 
+.portal-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.portal-nav-link {
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--ink-secondary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 8px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.portal-nav-link:hover {
+  color: var(--ink-primary);
+  background: var(--bg-subtle);
+}
+
+.portal-nav-link.active {
+  color: var(--accent-primary);
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+
+/* Mentor Profile Card */
+.mentor-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  max-width: 760px;
+}
+
+.mentor-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.mentor-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--accent-soft);
+  color: var(--accent-primary);
+  border: 1px solid var(--accent-border);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.mentor-name {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--ink-primary);
+  margin-bottom: 0.2rem;
+}
+
+.mentor-role {
+  font-size: 0.94rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  margin-bottom: 0.35rem;
+}
+
+.mentor-affil {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--ink-secondary);
+}
+
+.mentor-bio {
+  color: var(--ink-secondary);
+  font-size: 0.96rem;
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.mentor-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.mentor-contact-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  border-radius: 12px;
+  background: var(--bg-page);
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  color: var(--ink-primary);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.mentor-contact-item:hover {
+  border-color: var(--accent-primary);
+  background: var(--accent-soft);
+}
+
+.mentor-contact-label {
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ink-muted);
+  margin-bottom: 0.2rem;
+}
+
+.mentor-contact-val {
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-primary);
+}
+
 /* Main Layout */
 .portal-main {
   flex: 1;

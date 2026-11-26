@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 export function Navbar() {
   return (
@@ -10,7 +10,25 @@ export function Navbar() {
           <span className="portal-brand-sub">Slides</span>
         </Link>
 
-        <div className="portal-nav-meta">Classroom Slide Portal</div>
+        <nav className="portal-nav-links">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              `portal-nav-link ${isActive ? 'active' : ''}`
+            }
+          >
+            Subjects
+          </NavLink>
+          <NavLink
+            to="/mentor"
+            className={({ isActive }) =>
+              `portal-nav-link ${isActive ? 'active' : ''}`
+            }
+          >
+            Mentor
+          </NavLink>
+        </nav>
       </div>
     </header>
   );

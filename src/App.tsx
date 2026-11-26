@@ -2,12 +2,14 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { SubjectPage } from './pages/SubjectPage';
 import { SlideDeckPage } from './pages/SlideDeckPage';
+import { MentorPage } from './pages/MentorPage';
 
 export function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/mentor" element={<MentorPage />} />
         <Route path="/subject/:subjectSlug" element={<SubjectPage />} />
         <Route
           path="/subject/:subjectSlug/class/:classSlug"
